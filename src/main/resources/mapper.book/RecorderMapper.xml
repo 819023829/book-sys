@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.mbp.mapper.RecorderMapper">
+
+    <select id="listFull" resultType="com.book.mbp.entity.dto.RecorderDto">
+        select recorder.*,book_info.book_name,reader.name from recorder left join book_info on recorder.book_id=book_info.book_id left join reader on recorder.student_num=reader.student_num
+    </select>
+</mapper>

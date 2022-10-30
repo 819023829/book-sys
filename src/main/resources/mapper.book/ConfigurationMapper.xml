@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.mbp.mapper.ConfigurationMapper">
+
+    <select id="selectByStuNum" resultType="com.book.mbp.entity.dto.ConfigurationListDto" parameterType="com.book.mbp.entity.dto.ConfigurationListDto">
+        SELECT a.*,b.`name`,b.college,b.phone FROM configuration a left join reader b on a.student_num = b.student_num
+        <where>
+            <if test="studentNum != null">
+                a.student_num=#{studentNum}
+            </if>
+            <if test="name != null"  >
+            b.name like  concat('%',#{name},'%')
+            </if>
+            <if test="college != null">
+            b.college  like  concat('%',#{college},'%')
+            </if>
+            <if test="phone != null">
+                AND b.phone like concat ('%',#{phone},'%')
+            </if>
+        </where>
+        limit #{pageNum},#{pageSize}
+    </select>
+    <select id="selectByPage" resultType="com.book.mbp.entity.dto.ConfigurationListDto" parameterType="com.book.mbp.entity.dto.ConfigurationListDto">
+        SELECT a.*,b.`name`,b.college ,b.phone FROM configuration a left join reader b on a.student_num = b.student_num
+            ${ew.customSqlSegment}
+    </select>
+</mapper>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.mbp.mapper.ReserveMapper">
+
+
+    <select id="selectByStuNum" resultType="com.book.mbp.entity.dto.ReserveListDto">
+        SELECT a.*,b.book_author,b.book_name FROM reserve a LEFT JOIN book_info b on a.book_id=b.book_id and a.student_num=#{stuNum}
+    </select>
+</mapper>
